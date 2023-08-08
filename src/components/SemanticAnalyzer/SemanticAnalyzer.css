@@ -1,0 +1,52 @@
+.sa-container{
+    margin: 2rem 1rem 1rem 1rem;
+    border: 1px solid rgb(181, 174, 174);
+    border-radius: 10px;
+}
+.firstrow{
+    gap: 4rem;
+    height: 4rem;
+
+}
+
+.saTitle{
+    color: var(--purple);
+}
+.summaryLength{
+    color: var(--purple);
+}
+.enBotton{
+    font-size: small;
+    font-weight:600;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    color: var(--pink);
+    background: var(--blue);
+    cursor: pointer;
+    border-right: 1px solid var(--pink);
+}
+
+
+.frBotton{
+    border-radius: 0 5px 5px 0;
+    font-weight:600;
+    font-size: small;
+    padding: 0.2rem 0.6rem;
+    border: none;
+    color: var(--pink);
+    background: var(--blue);
+    cursor: pointer;
+}
+.languageBottons{
+    display: inline;
+    
+}
+
+.enBotton:hover{
+    background: #009ac0;
+}
+
+.frBotton:hover{
+    background: #009ac0;
+}

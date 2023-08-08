@@ -1,0 +1,35 @@
+.f-wrapper{
+    background: var(--purple);
+}
+.f-container{
+    justify-content: space-between;
+}
+
+.f-left{
+    gap: 1rem;
+}
+
+.f-menu{
+    margin-top: 1.1rem;
+    font-weight: 500;
+}
+
+.contact{
+    color: var(--pink);
+}
+.item{
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+
+@media (max-width: 768px){
+    .f-container{
+        justify-content: center;
+    }
+    .f-container>div{
+        align-items: center;
+        text-align: center;
+    }
+
+}
