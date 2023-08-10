@@ -1,9 +1,14 @@
 import React from 'react'
+import Header from '../components/Header/Header'
+import AboutUscom from '../components/AboutUscom/AboutUscom'
+import Footer from '../components/Footer/Footer'
 
 const AboutUs = () => {
   return (
-    <div>
-      hi
+    <div className='App'>
+      <Header/>
+      <AboutUscom/>
+      <Footer/>
     </div>
   )
 }

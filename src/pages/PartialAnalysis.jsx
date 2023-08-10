@@ -1,9 +1,14 @@
 import React from 'react'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
+import PartialAnalyzer from '../components/PartialAnalyzer/PartialAnalyzer'
 
 const PartialAnalysis = () => {
   return (
-    <div>
-      <h1>hey, Partial analysis page</h1>
+    <div className='App'>
+      <Header/>
+      <PartialAnalyzer/>
+      <Footer/>
     </div>
   )
 }

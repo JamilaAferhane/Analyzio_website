@@ -1,0 +1,34 @@
+.pa-section{
+    background: var(--blue);
+}
+.title{
+    color: var(--purple);
+}
+.primaryText{
+    color: var(--pink);
+}
+
+.paTitle{
+    color: var(--pink);
+    font-size: 1.7rem;
+}
+
+.head{
+    position: relative;
+    gap: 4rem;
+    height: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid;
+}
+.btns{
+    position: absolute;
+    right: 0;
+}
+.sections{
+    color: var(--purple);
+    font-size: large;
+    font-weight: 700;
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+}
