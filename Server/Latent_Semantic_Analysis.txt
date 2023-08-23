@@ -1,0 +1,90 @@
+Latent Semantic Analysis (LSA) is a technique for creating vector-based representations of texts which are claimed to capture their semantic con- tent.
+ The primary function of LSA is to compute the similarity of text pairs 1by comparing their vector representations.
+ This relatively simple similarity metric has been situated within a psychological theory of text meaning and has been shown to closely match human capabilities on a variety of tasks.
+ This article follows the developmental path of LSA, describing its histor- ical context, showing how it computes and uses its vector representations, and then giving examples of the theoretical and empirical support for LSA and its current research directions.
+ 2 How LSA works LSA (originally known as Latent Semantic Indexing) was developed for the task of Information Retrieval, that is, selecting from a large database of documents a few relevant documents which match a given query .
+ Previ- ous approaches to this task included keyword-matching, weighted keyword matching, and vector-based representations based on the occurrence of words in documents.
+ LSA extends the vector-based approach by using Singular Value Decomposition (SVD) to reconﬁgure the data.
+ The details of this pro- cess are described below, but the intuition is that there is a set of underlying latent variables which spans the meanings that can be expressed in a partic- ular language.
+ These variables are assumed to be independent (and therefore orthogonal in the vector space).
+ SVD is a matrix algebra technique which essentially re-orients and ranks the dimensions in a vector space.
+ Because the dimensions in a vector space computed by SVD are ordered from most to least signiﬁcant, if some of the less signiﬁcant dimensions are 2ignored, the reduced representation is guaranteed to be the best possible for that dimensionality.
+ In LSA, the typical assumption is that only the top 300 or so dimensions (out of tens or even hundreds of thousands) are useful for capturing the meaning of texts.
+ By basing the representations on a reduced number of dimensions, words that generally occur in similar contexts have similar vectors and will therefore get a high similarity rating.
+ The discarded dimensions are assumed to be the product of noise, random associations, or some other non-essential factor.
+ That LSA performed information retrieval better than its rival approaches is not especially surprising.
+ What is more surprising is how well it models human behavior on a variety of linguistic tasks.
+ Before describing these, however, the LSA technique is described in more detail.
+ Although there are some variations, the most common steps are these: •Collect a large set of (domain-relevant) text and separate it into “docu- ments”.
+ For most applications, each paragraph is treated as a separate document based on the intuition that the information within a para- graph tends to be coherent and related.
+ •Next, create a co-occurrence matrix of documents and terms.
+ The cell in this matrix corresponding to document xand term ycontains the number of times yoccurs in x.
+ A term is deﬁned as a word which occurs in more than one document, and no stemming or other morphological analysis is performed to try to combine diﬀerent forms of the same word.
+ 3If there are mterms and ndocuments, this matrix can be viewed as giving a representation which has an m-dimensional vector for each document, and an n-dimensional vector for each term.
+ •The values in each cell may be weighted to reduce the eﬀect of common words that occur through the corpus.
+ A common weighting method is “log entropy”, based on Information Theory, which multiplies the value by its information gain.
+ •SVD is invoked with a parameter kwhich speciﬁes the desired number of dimensions.
+ (In principle, the SVD would be computed with all the dimensions to create three matrices that, when multiplied together, would produce the original data, but due to the amount of memory that this would require, this is not feasible.
+ Instead, the currently used algorithms are optimized for dealing with sparse data spaces and compute only the most signiﬁcant kdimensions of the matrices.
+) The result of the processing above is three matrices.
+ One has a k- dimensional vector for each document, one has a k-dimensional vector for each term in the corpus, and one has the ksingular values.
+ The ﬁrst two matrices deﬁne two diﬀerent vector spaces which are also diﬀerent from the space deﬁned by the original matrix.
+ The singular values can be used to transform a vector from one space to the other.
+ The use of these matrices depends on the application.
+ For information retrieval, the document vectors contain the LSA repre- sentation of each document.
+ A query is turned into a “pseudodoc” in the 4document vector space by combining the vectors for the terms in the query, and dividing by the singular values.
+ Vectors are typically compared by com- puting the cosine between them.
+ (Some applications use other distance met- rics.
+) The closest vectors from the document vector space correspond to the documents which are closest in meaning to the query (according to LSA).
+ In most other applications, the original documents are only used for train- ing, that is, creating the semantic space.
+ To compare new texts, the term vectors are combined as described above.
+ Here, no manipulation with the singular values is required because the vectors are compared in the term space.
+ For more details about the mathematical foundations of LSA, see Golub (1989) and Hu (2005).
+ For more details about the creation of LSA spaces, see Deerwester (1990) and Quesada (2005).
+ 3 Support for LSA Support for LSA might be said to stem from the time of World War II when Wittgenstein wrote (what was later translated as): .
+ .
+ .
+ for a large class of cases — though not for all — in which we employ the word “meaning” it can be deﬁned as thus, the meaning of the word is its use in language.
+ (Wittgenstein, 1958, p.
+ 20) 5There have been a large number of psychological studies which have taken Wittgenstein’s words to heart, and shown that LSA’s behavior is closely matched with that of humans, for example: •LSA acquires words at a similar pace to human children, sometimes exceeding the number of words to which it is exposed (see Landauer and Dumais, 1997) .
+ •LSA’s knowledge of synonyms is as good as that of second-language English speakers as evidenced by scores on the Test of English as a Foreign Language (TOEFL, see Landauer, 1997) .
+ •LSA can tell students what they should read next to help them learn (see Wolfe, 1998).
+ •LSA can even interpret metaphors like, “My lawyer is a shark” (see Kintsch, 2001).
+ For textual applications, LSA has another beneﬁt besides its high cor- relation with human behavior.
+ When compared with the traditional labor- intensive approach to Natural Language Processing — developing a gram- mar, a lexicon, a semantic representation and the processing engine needed to combine them — developing an LSA-based representation is quite simple.
+ It also has the advantage of graceful degradation.
+ If it doesn’t know a word, LSA simply ignores it and bases its representation on the other words.
+ This has led researchers to use LSA for a variety of applications, including: 6•intelligent tutoring systems which allow students to enter unconstrained natural language replies to questions (see Graesser, 2000 and Wiemer- Hastings, 2004), •grading psychology essays by comparing them to pre-graded essays (see Foltz, 1996) , •evaluating summaries of documents to help teach summarization skills (Summary Street, described at http://colit.
+org/), •helping students learn to properly integrate and cite material from multiple documents (see Britt, 2005), and •evaluating airplane landings in a ﬂight simulator (see Quesada, 2005).
+ The only applicability constraints for LSA are that the task is text-based, it can be framed in terms of computing the similarity of texts, and there is an available training corpus.
+ The tutoring systems, for example, compare a student’s answer for a question to a set of expected answers.
+ If the student’s response is close enough to a good answer, then the system gives positive feedback and moves on to the next question.
+ If the student’s answer matches an expected bad answer, then the system steers the student back on track.
+ 4 Issues The research issues facing the LSA community range from the practical to the philosophical.
+ One basic question addresses the size and substance of the 7training corpus.
+ Many eﬀective LSA applications have been developed us- ing relatively small corpora.
+ In one of the successful applications mentioned above, LSA was trained on a corpus of only a couple hundred kilobytes with 2000 word types, 30,000 word tokens, and 325 documents.
+ In contrast, re- searchers at the University of Colorado have reported that they have trained LSA on a corpus containing 750,000 word types, 550 million word tokens, and 3.
+6 million documents.
+ Unfortunately, there is little hard evidence on what the “ideal” size of an LSA corpus might be.
+ The current data suggests that adding additional texts is unlikely to reduce performance, so a basic rule of thumb is, “the more the better.
+” The obvious follow-up question is, “What kinds of text should be included in an LSA corpus?” The common wisdom holds that the corpus should consist of texts which are relevant to the particular target task.
+ The domain can deﬁne a sub-language where words are interpreted in consistent ways.
+ Furthermore, a primary concern is to achieve suﬃcient coverage of the words which will be encountered in the course of running the application.
+ A domain- speciﬁc corpus will have a higher percentage of relevant words and will thus not waste its “representational power” on words that will not be seen by the application.
+ One critical objection that is raised against the LSA approach is that not only does it ignore the syntactic structure of sentences, it even ignores word order.
+ In other words, LSA treats a text as a bag of words.
+ In practice, LSA does well with longer passages of words (deﬁned by Rehder (1998) as 8more than 200 words ) where syntactic details may be “washed out”, and it also does well with single words (the TOEFL test, for example), but it does not do well on single sentences as shown by Wiemer-Hastings (1999) .
+ There have been a variety of approaches which attempt to deal with this, including surface parsing of sentences so that the components can be compared sepa- rately with LSA and using String Edit Theory to infer structural relations (see Wiemer-Hastings, 2001, Kanejiya, 2003, and Dennis, 2005) .
+ Another notable gap in LSA’s competence is negations.
+ thing that LSA “ignores” is negations, either because they are omitted from the LSA training via a “stop words” list, or simply because their widespread use throughout a corpus renders them representationally depleted.
+ Although no satisfactory approach yet exists for dealing with negations, a possibility would be to treat them as an essentially syntactic component that can processed as described above.
+ A more fundamental question about LSA is what its dimensions “mean”.
+ Because they represent latent variables, there is no clear deﬁnition.
+ As shown by Hu (2003), there is a high correlation between the ﬁrst dimension and the frequency of occurrence of the words in the corpus .
+ Beyond that, there are no clear answers.
+ There is also considerable debate as to what extent LSA captures ﬁrst order co-occurrence or higher order co-occurrence.
+ Recent evidence from Denhi` ere (2005) shows that although second order eﬀects do occur, large changes in the similarity measure between two words can be seen when a document is added to a training corpus in which both words occur (ﬁrst order co-occurrence) .
+ 9LSA’s utility and correspondence with human behavor have made it a popular technique for psycholinguistic research and text processing.
+ The issues describe here (along with others, for example, “Is LSA at all psycho- logically plausible?”) will keeep researchers busy for years to come.
+ A col- lection edited by McNamara (2005) provides considerably more detail about the current practice and research on LSA.
