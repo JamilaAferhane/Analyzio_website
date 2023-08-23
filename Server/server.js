@@ -36,12 +36,12 @@ app.post('/analyze', analyze.single('pdf'), async(req, res) => {
 
   // Generating keywords 
   const pythonKeywordsProcess = spawn('python', [
-    path.join(__dirname, './Algos/SemanticAnalysis/Keywords.py'),
+    path.join(__dirname, './Algos/SemanticAnalysis/KeywordsBridge.py'),
     pdfpath,
   ]);
   let keywords = []
   pythonKeywordsProcess.stdout.on('data', (data)=>{
-    keywords = data.toString().split(',');
+    keywords = data.toString();
     console.log(keywords)
   });
   
@@ -50,17 +50,16 @@ app.post('/analyze', analyze.single('pdf'), async(req, res) => {
     path.join(__dirname, './Algos/SemanticAnalysis/bridge.py'),
     pdfpath,
   ]);
-
-  let generatedSummary = '';
+  let summary = '';
   pythonProcess.stdout.on('data', (data) => {
-    generatedSummary += data.toString();
-    console.log('Generated Summary:', generatedSummary)
+    summary += data.toString();
+    console.log('Generated Summary:', summary)
   });
 
   pythonProcess.on('close', (code) => {
     if (code === 0){
-        res.json({ title, keywords, generatedSummary});
-        console.log('Summary successfully sent')
+        res.json({ title, keywords, summary});
+        console.log('analyze result successfully sent')
     } else {
         console.error('Error generating summary')
         res.status(500).json({ error: 'Error generating summary'})

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import './SemanticAnalyzer.css';
+import { parse } from 'uuid';
 
 axios.defaults.baseURL = 'http://localhost:3001'; 
 
@@ -8,7 +9,7 @@ const SemanticAnalyzer = () => {
   const [pdfContent, setPdfContent] = useState('');
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [generatedTitle, setTitle ] = useState('');
-  const [generatedKeywords, setKeywords] = useState('');
+  const [generatedKeywords, setKeywords] = useState([]);
   const [generatedSummary, setGeneratedSummary] = useState('');
 
   // upload button logic
@@ -59,9 +60,12 @@ const SemanticAnalyzer = () => {
     try {
       const response = await axios.post('/analyze', formData);
       const { title, keywords, summary } = response.data;
-      
+      const parsedKeywords = keywords
+      ? keywords.replace(/'|\[|\]/g,'')
+      : [];
+
       setTitle(title);
-      setKeywords(keywords);
+      setKeywords(parsedKeywords);
       setGeneratedSummary(summary);
       console.log('Summary:', summary);
     } catch(error){
@@ -98,9 +102,9 @@ const SemanticAnalyzer = () => {
                     <p className="titre">Title:</p>
                     <p className="result titlere">{generatedTitle}</p>
                     <p className="titre">Keywords:</p>
-                    <p className="result keywordsre">{generatedKeywords}</p>
+                    <p className="result keywordsre"> {generatedKeywords}</p>
                     <p className='titre'>Summary:</p>
-                    <p className='result'>{generatedSummary}</p>
+                    <p className='result'> {generatedSummary}</p>
                   </div>
               </div>
               

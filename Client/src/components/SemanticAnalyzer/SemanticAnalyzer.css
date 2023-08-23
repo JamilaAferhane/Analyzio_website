@@ -98,6 +98,8 @@ input[type="range"]::-webkit-slider-thumb {
     border: 1px solid rgb(194, 192, 192) ;
     border-radius: 0 0px 0px 10px;
     overflow: auto;
+    padding-left: 0.5rem;
+    padding-top: 0.4rem;
 }
 
 
@@ -107,7 +109,8 @@ input[type="range"]::-webkit-slider-thumb {
     border: 1px solid rgb(194, 192, 192) ;
     border-radius: 0px 0 10px 0px;
     overflow: auto;
-
+    padding-left: 0.5rem;
+    padding-top: 0.4rem;
 }
 
 .b-container{
@@ -161,7 +164,7 @@ label:hover{
 
 .titre{
     color: var(--purple);
-    font-size: large;
+    font-size: larger;
     font-weight: bold;
     margin-top: 0.5rem;
 }

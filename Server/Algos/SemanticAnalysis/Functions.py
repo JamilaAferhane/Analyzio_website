@@ -19,7 +19,7 @@ def load_data(path, file_name):
     Output: List of sentences of the file
     """
     sentences_list = []
-    with open (os.path.join(path, file_name), "r", encoding="utf-8") as fin:
+    with open (os.path.join(path, file_name), "r", encoding='utf-8') as fin:
         text = ""
         for line in fin:
             line = line.strip()
